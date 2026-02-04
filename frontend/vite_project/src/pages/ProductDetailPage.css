@@ -1,0 +1,25 @@
+.product-detail {
+  display: flex;
+  gap: 40px;
+  padding: 40px;
+}
+
+.image-box {
+  width: 250px;
+  height: 250px;
+  background: #ddd;
+}
+
+.info-box {
+  max-width: 500px;
+}
+
+.signup-link {
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.signup-link span {
+  color: blue;
+  text-decoration: underline;
+}

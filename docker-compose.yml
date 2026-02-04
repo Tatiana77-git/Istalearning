@@ -1,11 +1,42 @@
+# services:
+#   db:
+#     image: postgres:16
+#     restart: always
+#     environment:
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: 123456
+#       POSTGRES_DB: istalearning
+#     volumes:
+#       - ./backend/sql/init_data.sql:/docker-entrypoint-initdb.d/01_init_data.sql
+#       - ./backend/sql/fake_data.sql:/docker-entrypoint-initdb.d/02_fake_data.sql
+#     ports:
+#       - "5432:5432"
+
+#   backend:
+#     build:
+#       context: ./backend
+#     restart: always
+#     environment:
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: 123456
+#       POSTGRES_DB: istalearning
+#       POSTGRES_HOST: db
+#       POSTGRES_PORT: 5432
+#     depends_on:
+#       - db
+#     ports:
+#       - "3000:3000"
+
+
+
 services:
   db:
     image: postgres:16
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 123456
-      POSTGRES_DB: istalearning
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - ./backend/sql/init_data.sql:/docker-entrypoint-initdb.d/01_init_data.sql
       - ./backend/sql/fake_data.sql:/docker-entrypoint-initdb.d/02_fake_data.sql
@@ -17,12 +48,15 @@ services:
       context: ./backend
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 123456
-      POSTGRES_DB: istalearning
-      POSTGRES_HOST: db
-      POSTGRES_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      BACKEND_JWT_SECRET: ${BACKEND_JWT_SECRET}
+      BACKEND_JWT_TTL: ${BACKEND_JWT_RT_TTL}
+      BACKEND_CORS_ALLOWED: ${BACKEND_CORS_ALLOWED}
     depends_on:
       - db
     ports:
-      - "3000:3000"
+      - "${BACKEND_PORT}:3000"
