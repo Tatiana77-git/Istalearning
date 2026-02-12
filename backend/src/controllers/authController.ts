@@ -75,7 +75,7 @@ export const signin = async (req:Request, res:Response) => {
 
     // 2. Ищем пользователя по email
     const result = await pool.query(
-      "SELECT id_customer, password_hash FROM customers WHERE email = $1",
+      "SELECT id_customer, password_hash, is_admin FROM customers WHERE email = $1",
       [email]
     );
 
@@ -104,6 +104,7 @@ export const signin = async (req:Request, res:Response) => {
 
 const token = signRefreshToken({
   userId: user.id_customer,
+  isAdmin: user.is_admin, 
 });
  
 return res.status(200).json({

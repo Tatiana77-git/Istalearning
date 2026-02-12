@@ -5,6 +5,7 @@ import customersRoutes from "./routes/customersRoutes"
 import paymentsRoutes from "./routes/paymentsRoutes"
 import purchasesRoutes from "./routes/purchasesRoutes"
 import { authRoute } from "./routes/authRoutes";
+import adminRoutes from "./routes/adminRoutes";
 
 
 export const app = express();
@@ -23,6 +24,7 @@ app.use("/customers", customersRoutes)
 app.use("/payments", paymentsRoutes)
 app.use("/purchases", purchasesRoutes)
 app.use("/auth", authRoute)
+app.use("/admin", adminRoutes);
 
 
 app.get("/", (req, res) => {

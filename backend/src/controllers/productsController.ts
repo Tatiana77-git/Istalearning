@@ -1,9 +1,12 @@
 import { Request, Response } from "express";
 import { pool } from "../config/db";
 
+
 export const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const query = `
+    const { lang } = req.query; // получаем ?lang=en
+
+    let query = `
       SELECT
         id_product,
         title,
@@ -12,15 +15,24 @@ export const getAllProducts = async (req: Request, res: Response) => {
         price,
         test_url
       FROM products
-      ORDER BY id_product ASC
     `;
 
-    const result = await pool.query(query);
+    const values: any[] = [];
+
+    if (typeof req.query.lang === "string") {
+      query += " WHERE language_code = $1";
+      values.push(req.query.lang.toUpperCase());
+    }
+
+    query += " ORDER BY level ASC";
+
+    const result = await pool.query(query, values);
 
     return res.status(200).json({
       success: true,
       data: result.rows,
     });
+
   } catch (error) {
     console.error("Erreur getAllProducts:", error);
 
@@ -30,7 +42,6 @@ export const getAllProducts = async (req: Request, res: Response) => {
     });
   }
 };
-
 
 
 
@@ -45,7 +56,8 @@ export const getProductById = async (req: Request, res: Response) => {
         level,
         language_code,
         price,
-        test_url
+        test_url,
+        description
       FROM products
       WHERE id_product = $1
     `;

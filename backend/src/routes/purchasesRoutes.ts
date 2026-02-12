@@ -3,9 +3,11 @@ import { getAllPurchases, getMyPurchases, createPurchase } from "../controllers/
 import { authMiddleware } from "../middlewares/authMiddleware";
 
 
+
+
  const router = Router();
 
- router.get("/", getAllPurchases);
+ router.get("/", authMiddleware, getAllPurchases);
  router.get ("/my", authMiddleware, getMyPurchases)
  router.post("/", authMiddleware, createPurchase)
 

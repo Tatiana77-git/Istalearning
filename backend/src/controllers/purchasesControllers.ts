@@ -4,43 +4,47 @@ import { AuthRequest } from "../middlewares/authMiddleware";
 
 
 
+// export const getAllPurchases = async (req: AuthRequest, res: Response) => {
+//   try {
+//     console.log("gerAllPurchases called");
+//     const result = await pool.query(
+//       "SELECT id_purchase, status, amount, currency, created_at, customer_id, product_id FROM purchases ORDER BY created_at DESC"
+//     );
+//   console.log("rows length:",result.rows.length);
+//     return res.status(200).json({
+//       success: true,
+//       data: result.rows,
+//     });
+//   } catch (error) {
+//      console.error("Error getAllPurchases:", error);
+//      return res.status(500).json({
+//        success: false,
+//        message: "Cannot fetch purchases",
+//      });
+//    }
+//  };
 
-export const getAllPurchases = async (req: Request, res: Response) => {
-
+export const getAllPurchases = async (req: AuthRequest, res: Response) => {
   try {
-    const query = `
-      SELECT
-        id_purchase,
-        status,
-        amount,
-        currency,
-        created_at,
-        product_id,
-        customer_id
-      FROM purchases
-      ORDER BY id_purchase ASC
-    `;
+    const result = await pool.query(
+      "SELECT purchases.id_purchase, purchases.status, purchases.amount, purchases.currency, purchases.created_at, customers.email AS customer_email \
+       FROM purchases \
+       JOIN customers ON customers.id_customer = purchases.customer_id \
+       ORDER BY purchases.created_at DESC"
+    );
 
-   const result = await pool.query(query)
-
-   return res.status(200).json({
+    return res.status(200).json({
       success: true,
       data: result.rows,
     });
   } catch (error) {
-    console.error("Erreur getAllPurchases:", error);
-
+    console.error("Error getAllPurchases:", error);
     return res.status(500).json({
       success: false,
-      message: "Erreur lors de la récupération de comande",
+      message: "Cannot fetch purchases",
     });
   }
 };
-
-
-
-
-// get getMyPurchases montrer les achats 
 
 
 export const getMyPurchases = async (req: AuthRequest, res: Response) => {
@@ -48,18 +52,7 @@ export const getMyPurchases = async (req: AuthRequest, res: Response) => {
     const userId = req.user!.userId;
 
     const result = await pool.query(
-      `
-      SELECT
-        id_purchase,
-        status,
-        amount,
-        currency,
-        created_at,
-        product_id
-      FROM purchases
-      WHERE customer_id = $1
-      ORDER BY created_at DESC
-      `,
+      "SELECT id_purchase, status, amount, currency, created_at FROM purchases WHERE customer_id = $1 ORDER BY created_at DESC",
       [userId]
     );
 
@@ -75,9 +68,6 @@ export const getMyPurchases = async (req: AuthRequest, res: Response) => {
     });
   }
 };
-
-
-
 
 
 

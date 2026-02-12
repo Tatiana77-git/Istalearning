@@ -5,6 +5,8 @@ import jwt from "jsonwebtoken";
 export interface AuthRequest extends Request {
   user?: {
     userId:number;
+    isAdmin: boolean;
+    
   };
 }
 export const authMiddleware = (
@@ -29,7 +31,7 @@ export const authMiddleware = (
     const decoded = jwt.verify(
       token,
       process.env.BACKEND_JWT_SECRET as string
-    ) as {userId:number};
+    ) as {userId:number; isAdmin:boolean};
 
     req.user = decoded; // ✅ ТИПИЗИРОВАНО
     next();

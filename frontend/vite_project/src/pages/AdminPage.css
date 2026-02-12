@@ -1,0 +1,68 @@
+/* Общий контейнер */
+.admin-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(180deg, #f5faff, #e6f2ff);
+  padding: 40px 20px;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Заголовок */
+.admin-container h1 {
+  color: #0a58ca;
+  margin-bottom: 40px;
+  font-size: 32px;
+}
+
+/* Блоки customers / purchases */
+.admin-container h2 {
+  color: #0d6efd;
+  margin: 30px 0 15px;
+  text-align: center;
+}
+
+/* Таблицы */
+.admin-container table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 900px;
+  background: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Заголовки таблицы */
+.admin-container thead {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.admin-container th,
+.admin-container td {
+  padding: 12px 16px;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Строки */
+.admin-container tbody tr:nth-child(even) {
+  background-color: #f2f7ff;
+}
+
+.admin-container tbody tr:hover {
+  background-color: #e8f1ff;
+}
+
+/* Текст */
+.admin-container td {
+  color: #333;
+}
+
+/* Отступ между таблицами */
+.admin-container table + h2 {
+  margin-top: 50px;
+}

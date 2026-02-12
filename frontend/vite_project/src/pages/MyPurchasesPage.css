@@ -1,0 +1,17 @@
+.mypurchases-container {
+  padding: 20px;
+}
+
+.purchase-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.error {
+  color: red;
+}
+
+.empty {
+  color: gray;
+}
