@@ -9,8 +9,12 @@
  function ProductDetailPage() {
    const navigate = useNavigate();
    const { id } = useParams();
-   const [product, setProduct] = useState<any>(null);
    const [loading, setLoading] = useState(true);
+   const [product, setProduct] = useState<any>(null);
+   const getCertificatePath =(language:string, level:string)=> {
+    return `/certificates/${language.toLowerCase()}_${level}.png`;
+  }
+
 
    useEffect(() => {
      if (!id) return;
@@ -63,7 +67,7 @@
       {/* Certificate */}
       <div className="product-detail-image">
         <img
-          src="/src/assets/certificate.jpg"
+          src={getCertificatePath(product.language_code, product.level)}
           alt="Certificate"
         />
       </div>

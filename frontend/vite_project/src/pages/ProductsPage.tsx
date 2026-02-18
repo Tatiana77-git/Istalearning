@@ -8,12 +8,15 @@ import frFlag from "../assets/fr.jpg";
 import deFlag from "../assets/de.jpg";
 import ruFlag from "../assets/ru.jpg"
 
-import certificateImage from "../assets/certificate.jpg";
+
 
 function ProductsPage() {
   const [products, setProducts] = useState<any[]>([]);
   const navigate = useNavigate();
   const {code} = useParams();
+  const getCertificatePath =(language:string, level:string)=> {
+    return `/certificates/${language.toLowerCase()}_${level}.png`;
+  }
 
   let bannerImage = engFlag;
 
@@ -53,7 +56,7 @@ function ProductsPage() {
           <div key={product.id_product} className="product-card">
 
             <div className="product-image">
-              <img src={certificateImage} alt="Certificate" />
+              <img src={getCertificatePath(product.language_code, product.level)} alt="Certificate" />
             </div>
 
             <h3 className="product-title">{product.title}</h3>
