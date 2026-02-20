@@ -1,47 +1,27 @@
 
 
-
-// import { Link } from "react-router-dom";
-// import "./Header.css";
-// import logo from "../assets/ista.jpg"; // проверь путь и имя файла
-
-// function Header() {
-//   return (
-//     <header className="site-header">
-//       <Link to="/" className="site-logo">
-//         <img src={logo} alt="ISTA" />
-//       </Link>
-
-//       <nav className="site-nav">
-//         <Link to="/">Home</Link>
-//         <Link to="/auth">Connection</Link>
-
-//         <div className="dropdown">
-//           <button className="dropdown-btn">Langues ▾</button>
-//           <div className="dropdown-menu">
-//             <Link to="/lang/en">Anglais</Link>
-//             <Link to="/lang/fr">Français</Link>
-//             <Link to="/lang/de">Allemand</Link>
-//             <Link to="/lang/ru">Russe</Link>
-//           </div>
-//         </div>
-
-//         <Link to="/my-purchases">My purchases</Link>
-//       </nav>
-//     </header>
-//   );
-// }
-
-// export default Header;
-
-
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./Header.css";
 import logo from "../assets/ista.jpg";
 
 function Header() {
-  const [uiLang, setUiLang] = useState("FR"); // язык интерфейса
+  const [uiLang, setUiLang] = useState("FR"); 
+  const [menuOpen, setMenuOpen] = useState(false);
+  const token= localStorage.getItem("token");
+
+  let isAdmin = false;
+
+  if (token) {
+    try { const payload= JSON.parse(atob(token.split(".")[1]));;
+      isAdmin = payload.isAdmin;
+    }
+    catch (error)  {
+        console.error("Invalid token:", error);
+    }
+   
+    
+  }
 
   return (
     <header className="header">
@@ -49,7 +29,11 @@ function Header() {
         <img src={logo} alt="ISTA" />
       </Link>
 
-      <nav className="nav">
+    <button className="burger" onClick={() => setMenuOpen(!menuOpen)}>
+    =
+    </button>
+
+      <nav className={`nav ${menuOpen ? "open" : ""}`}>
         <Link to="/">{uiLang === "FR" ? "Accueil" : "Home"}</Link>
         <Link to="/auth">
           {uiLang === "FR" ? "Connexion" : "Connection"}
@@ -67,9 +51,13 @@ function Header() {
           </div>
         </div>
 
-        <Link to="/my-purchases">
-          {uiLang === "FR" ? "Mes achats" : "My purchases"}
-        </Link>
+        {!isAdmin && (
+          <Link to="/my-purchases">
+            {uiLang === "FR" ? "Mes achats" : "My purchases"}
+          </Link>
+        )}
+
+         {isAdmin && (<Link to ="/admin">Admin</Link>)}
 
         {/* 2️⃣ Язык ИНТЕРФЕЙСА */}
         <div className="dropdown">
@@ -82,6 +70,17 @@ function Header() {
           </div>
         </div>
       </nav>
+
+       {token && (
+        <button
+         onClick={() => {
+            localStorage.removeItem("token");
+            window.location.href ="/";
+         }}
+         >Logout</button>
+       )}
+
+
     </header>
   );
 }

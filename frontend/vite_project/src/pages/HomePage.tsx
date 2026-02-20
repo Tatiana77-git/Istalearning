@@ -1,10 +1,20 @@
 
-function HomePage () {
-    return <div>
+import HeroBanner from "../components/HeroBanner";
+import SkillsVideoSection from "../components/SkillsVideoSection";
+import UseCasesSection from "../components/UseCasesSection";
+import LanguagesCarousel from "../components/LanguagesCarousel";
 
-        <h1 className="home">Hello</h1>
-        <h2>Sélectionnez votre lanque das le menu "Langues"</h2>
-    </div>
+
+function HomePage () {
+    return (
+        <>
+        <HeroBanner />
+        <UseCasesSection />
+        <SkillsVideoSection />
+        <LanguagesCarousel />
+        </>
+    )
+    
 }
 
 export default  HomePage

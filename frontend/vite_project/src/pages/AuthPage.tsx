@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./AuthPage.css";
 
 
@@ -12,7 +12,7 @@ function AuthPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword,  setConfirmPassword] = useState("")
   const [message, setMessage] = useState("");
-  const navigate = useNavigate();
+
   const location = useLocation ();
 
  const redirectTo = 
@@ -61,8 +61,8 @@ function AuthPage() {
         return;
       }
       localStorage.setItem("token", data.token);
-      console.log("Redirect to:",redirectTo)
-      navigate(redirectTo);
+      window.location.href = redirectTo || "/";
+ 
     })
     .catch(() => {
       setMessage("Server error");

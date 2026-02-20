@@ -1,28 +1,8 @@
 import { Request, Response } from "express";
 import { pool } from "../config/db"; 
 import { AuthRequest } from "../middlewares/authMiddleware";
+import { success } from "zod";
 
-
-
-// export const getAllPurchases = async (req: AuthRequest, res: Response) => {
-//   try {
-//     console.log("gerAllPurchases called");
-//     const result = await pool.query(
-//       "SELECT id_purchase, status, amount, currency, created_at, customer_id, product_id FROM purchases ORDER BY created_at DESC"
-//     );
-//   console.log("rows length:",result.rows.length);
-//     return res.status(200).json({
-//       success: true,
-//       data: result.rows,
-//     });
-//   } catch (error) {
-//      console.error("Error getAllPurchases:", error);
-//      return res.status(500).json({
-//        success: false,
-//        message: "Cannot fetch purchases",
-//      });
-//    }
-//  };
 
 export const getAllPurchases = async (req: AuthRequest, res: Response) => {
   try {
@@ -77,6 +57,13 @@ export const getMyPurchases = async (req: AuthRequest, res: Response) => {
 
 export const createPurchase = async (req:AuthRequest, res:Response) => {
   try {
+
+    if (req.user?.isAdmin) {
+      return res.status(403).json ( {
+        success:false,
+        message:"Admins cannot create purchases",
+      })
+    }
   
     const userId =req.user!.userId;
     const { product_id} = req.body;

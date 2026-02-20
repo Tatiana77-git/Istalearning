@@ -1,0 +1,37 @@
+.flags-carousel {
+  width: 100%;
+  overflow: hidden;
+  padding: 40px 0;
+  background: #fff;
+  margin-top: 60px 0;
+}
+
+.flags-track {
+  display: flex;
+  gap: 130px;
+  width: max-content;
+  animation: scrollFlags 20s linear infinite;
+}
+
+.flag {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.flag:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+
+@keyframes scrollFlags {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

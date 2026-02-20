@@ -19,8 +19,6 @@
    useEffect(() => {
      if (!id) return;
 
-
-
        fetch(`http://localhost:3000/products/${id}`)
          .then((res) => res.json())
          .then((data) => {
@@ -32,6 +30,19 @@
 
     if (loading) return <p>Loading...</p>;
     if (!product) return <p>Product not found</p>;
+
+    const token = localStorage.getItem("token");
+    let isAdmin = false ;
+
+    if (token) {
+      try{
+        const payload = JSON.parse(atob(token.split(".")[1]));
+        isAdmin= payload.isAdmin;
+      }
+      catch (error) {
+        console.error("Invalid token", error);
+      }
+    }
 
   const handleBuy = () => {
    const token = localStorage.getItem("token");
@@ -84,9 +95,11 @@
           </p>
         </div>
 
-        <button className="buy-button" onClick={handleBuy}>
-          Acheter le test
-        </button>
+        {!isAdmin && (
+          <button className="buy-button" onClick={handleBuy}>
+            Acheter le test
+          </button>
+        )}
 
         <p className="auth-link">
           Vous n’avez pas de compte ?{" "}
