@@ -50,9 +50,6 @@ export const getMyPurchases = async (req: AuthRequest, res: Response) => {
 };
 
 
-
-
-
 // POST purchses acheter le test 
 
 export const createPurchase = async (req:AuthRequest, res:Response) => {
@@ -75,9 +72,9 @@ export const createPurchase = async (req:AuthRequest, res:Response) => {
       });
     }
 
-    // 1. получаем продукт
+   
     const product = await pool.query(
-      "SELECT price FROM products WHERE id_product = $1",
+      "SELECT price, test_url FROM products WHERE id_product = $1",
       [product_id]
     );
 
@@ -89,21 +86,10 @@ export const createPurchase = async (req:AuthRequest, res:Response) => {
     }
 
 
-    const customer = await pool.query(
-  "SELECT id_customer FROM customers WHERE id_customer = $1",
-  [userId]
-);
-
-if (customer.rowCount === 0) {
-  return res.status(404).json({
-    success: false,
-    message: "Customer not found",
-  });
-}
 
     const price = product.rows[0].price;
+    const test_url = product.rows[0].test_url;
 
-    // 2. создаём purchase
     const purchase = await pool.query(
       `
       INSERT INTO purchases (status, amount, currency, created_at, product_id, customer_id)
@@ -116,7 +102,7 @@ if (customer.rowCount === 0) {
     return res.status(201).json({
       success: true,
       data: {
-        id_purchase: purchase.rows[0].id_purchase,
+        id_purchase: purchase.rows[0].id_purchase,test_url: test_url
       },
     });
   } catch (error) {

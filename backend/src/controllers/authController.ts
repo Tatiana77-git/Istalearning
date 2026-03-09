@@ -13,7 +13,7 @@ export const signup = async (req: Request, res: Response) => {
   try {
     const { email, password, phone } = req.body;
 
-    // 1) проверка входных данных
+  
     if (!email || !password || !phone) {
       return res.status(400).json({
         success: false,
@@ -21,10 +21,10 @@ export const signup = async (req: Request, res: Response) => {
       });
     }
 
-    // 2) хешируем пароль
+ 
     const passwordHash = await argon2.hash(password);
 
-    // 3) записываем пользователя в таблицу customers
+ 
     const result = await pool.query(
       `
       INSERT INTO customers (email, phone, password_hash, created_at)
@@ -34,13 +34,13 @@ export const signup = async (req: Request, res: Response) => {
       [email, phone, passwordHash]
     );
 
-    // 4) ответ
+  
     return res.status(201).json({
       success: true,
       data: result.rows[0],
     });
   } catch (error: any) {
-    // email уже существует
+  
     if (error.code === "23505") {
       return res.status(409).json({
         success: false,
@@ -65,7 +65,7 @@ export const signin = async (req:Request, res:Response) => {
   try {
     const { email, password } = req.body;
 
-    // 1. Проверяем, что данные пришли
+
     if (!email || !password) {
       return res.status(400).json({
         success: false,
@@ -73,13 +73,13 @@ export const signin = async (req:Request, res:Response) => {
       });
     }
 
-    // 2. Ищем пользователя по email
+  
     const result = await pool.query(
       "SELECT id_customer, password_hash, is_admin FROM customers WHERE email = $1",
       [email]
     );
 
-    // 3. Если не нашли — ошибка
+
     if (result.rows.length === 0) {
       return res.status(401).json({
         success: false,
@@ -89,7 +89,7 @@ export const signin = async (req:Request, res:Response) => {
 
     const user = result.rows[0];
 
-    // 4. Проверяем пароль
+
     const ok = await argon2.verify(user.password_hash, password);
 
     if (!ok) {
@@ -99,7 +99,7 @@ export const signin = async (req:Request, res:Response) => {
       });
     }
 
-    // 5. JWT
+    // JWT
  
 
 const token = signRefreshToken({

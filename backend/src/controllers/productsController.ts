@@ -4,7 +4,7 @@ import { pool } from "../config/db";
 
 export const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const { lang } = req.query; // получаем ?lang=en
+    const { lang } = req.query; 
 
     let query = `
       SELECT

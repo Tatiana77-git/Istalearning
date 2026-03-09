@@ -1,0 +1,131 @@
+
+.usage-page {
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+
+.usage-icon {
+  width: 130px;
+  height: 130px;
+  margin-bottom: 20px;
+}
+
+
+.usage-title {
+  font-size: 44px;
+  font-weight: 600;
+  color: #0B3A6E;
+  margin-bottom: 40px;
+  letter-spacing: 0.3px;
+}
+
+
+.usage-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 50px 40px;
+  margin-bottom: 40px;
+
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+
+.usage-text {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+
+.usage-list {
+  list-style: disc;
+  margin: 20px auto;
+  padding: 0;
+  max-width: 500px;
+  text-align: left;
+}
+
+.usage-list li {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+
+.usage-side {
+  margin-top: 10px;
+}
+
+.usage-avec {
+  font-size: 25px;
+  font-weight: 600;
+  color: #0B3A6E;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+.usage-badge {
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.usage-badgeTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #0B3A6E;
+}
+
+.usage-badgeSmall {
+  font-size: 15px;
+  color: #555;
+}
+
+
+.usage-call {
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 30px;
+  color: #222;
+}
+
+
+.usage-button {
+  margin-top: 20px;
+  padding: 15px 34px;
+  font-size: 17px;
+  border: none;
+  border-radius: 10px;
+  background-color: #0B3A6E;
+  color: white;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.usage-button:hover {
+  background-color: #092c52;
+  transform: translateY(-2px);
+}
+
+
+@media (max-width: 768px) {
+  .usage-title {
+    font-size: 26px;
+  }
+
+  .usage-card {
+    padding: 30px 20px;
+  }
+
+  .usage-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .usage-button {
+    width: 100%;
+  }
+}

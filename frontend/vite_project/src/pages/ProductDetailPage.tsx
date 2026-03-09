@@ -1,9 +1,9 @@
 
-
  import { useEffect, useState } from "react";
  import { useParams } from "react-router-dom";
  import { useNavigate } from "react-router-dom";
  import"./ProductDetailPage.css";
+
 
 
  function ProductDetailPage() {
@@ -11,10 +11,10 @@
    const { id } = useParams();
    const [loading, setLoading] = useState(true);
    const [product, setProduct] = useState<any>(null);
-   const getCertificatePath =(language:string, level:string)=> {
-    return `/certificates/${language.toLowerCase()}_${level}.png`;
-  }
 
+   const getCertificatePath =(language:string, level:string)=> {
+     return `/certificates/${language.toLowerCase()}_${level}.png`;
+  }
 
    useEffect(() => {
      if (!id) return;
@@ -39,43 +39,26 @@
         const payload = JSON.parse(atob(token.split(".")[1]));
         isAdmin= payload.isAdmin;
       }
-      catch (error) {
+        catch (error) {
         console.error("Invalid token", error);
       }
     }
 
-  const handleBuy = () => {
-   const token = localStorage.getItem("token");
+   const handleBuy = () => {
+    const token = localStorage.getItem("token");
 
-   if (!token) {
-     navigate(`/auth?redirect=/products/${id}`);
-     return;
-   }
+    if (!token) {
+      navigate(`/auth?redirect=/products/${id}`);
+      return;
+    }
 
-   fetch("http://localhost:3000/purchases", {
-     method: "POST",
-     headers: {
-       "Content-Type": "application/json",
-       Authorization: "Bearer " + token,
-     },
-     body: JSON.stringify({
-       product_id: Number(id),
-     }),
-   })
-     .then((res) => res.json())
-     .then(() => {
-       alert("Purchase created ✅");
-     })
-     .catch(() => {
-       alert("Purchase failed ❌");
-     });
- };
+    navigate(`/payment/${id}`);
+  };
+
 
   return (
   <div className="product-detail-page">
     <div className="product-detail-card">
-
-      {/* Certificate */}
       <div className="product-detail-image">
         <img
           src={getCertificatePath(product.language_code, product.level)}
@@ -83,7 +66,6 @@
         />
       </div>
 
-      {/* Content */}
       <div className="product-detail-content">
         <h1 className="product-title">{product.title}</h1>
 
@@ -108,7 +90,6 @@
           </span>
         </p>
       </div>
-
     </div>
   </div>
 );

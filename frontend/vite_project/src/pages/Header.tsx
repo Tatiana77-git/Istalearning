@@ -39,7 +39,7 @@ function Header() {
           {uiLang === "FR" ? "Connexion" : "Connection"}
         </Link>
 
-        {/* 1️⃣ Навигация по языкам ПРОДУКТОВ */}
+     
         <div className="dropdown">
           <span className="dropdown-title">Langues ▾</span>
           <div className="dropdown-menu">
@@ -59,7 +59,7 @@ function Header() {
 
          {isAdmin && (<Link to ="/admin">Admin</Link>)}
 
-        {/* 2️⃣ Язык ИНТЕРФЕЙСА */}
+  
         <div className="dropdown">
           <span className="dropdown-title">🌍 {uiLang} ▾</span>
           <div className="dropdown-menu">
