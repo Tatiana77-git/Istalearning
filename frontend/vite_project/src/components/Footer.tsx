@@ -55,7 +55,9 @@ function Footer() {
         <div className="footer-right">
 
           <div className="social-icons">
-            <a href="https://wa.me/33652778922" target="_blank" rel="noopener noreferrer"><img src="/icons/whatsapp.png" alt="WhatsApp" /></a>
+            <a href="https://chat.whatsapp.com/EKy683NY5xEFms2h1WUxi0?mode=hq1tshi" target="_blank" rel="noopener noreferrer"><img src="/icons/whatsapp.png" alt="WhatsApp" /></a>
+            <a href="#" target="_blank" rel="noopener noreferrer"><img src="/icons/linkedin.png" alt="LinkedIn" /></a>
+            <a href="#" target="_blank" rel="noopener noreferrer"><img src="/icons/tiktok.png" alt="TikTok" /></a>
             <a href="https://www.instagram.com/studyinfrance.katrin?igsh=dDFvcTh1Ymllb3Zy&utm_source=qr" target="_blank" rel="noopener noreferrer"><img src="/icons/instagram.png" alt="Instagram" /></a>
             <a href="https://youtube.com/@istalearning.fr_ekaterinayakub?si=lzBVVZpBoaOAQNZAs"  target="_blank" rel="noopener noreferrer"><img src="/icons/youtube.png" alt="YouTube" /></a>
             <a href="https://t.me/studyinfranceKATRIN" target="_blank" rel="noopener noreferrer"><img src="/icons/telegram.png" alt="Telegram" /></a>

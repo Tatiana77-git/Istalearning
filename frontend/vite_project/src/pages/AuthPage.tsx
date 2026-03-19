@@ -110,7 +110,7 @@ function AuthPage() {
         />   
         
         )}
-  <div style={{ display: "flex", gap: "10px" }}>
+  <div className="auth-buttons">
   <button
     onClick={() => {
       setMessage("");
@@ -131,7 +131,14 @@ function AuthPage() {
 </div>
 
        
-        
+        {mode === "login" && (
+  <p
+    className="forgot-password-link"
+    onClick={() => window.location.href = "/forgot-password"}
+  >
+    Mot de passe oublié ?
+  </p>
+)}
 
         <p>{message}</p>
       </div>

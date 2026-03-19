@@ -20,28 +20,37 @@ function UseCasesSection() {
       </p>
 
       <div className="usecases-grid">
-        <Link to="/work" className="usecase-card" aria-label="Pour travailler">
+
+        <Link to="/work" 
+        className="usecase-card" 
+        aria-label="Pour travailler">
+
           <div className="usecase-circle">
             <img src="/icons/work.png" alt="Work" />
           </div>
+          
           <div className="usecase-label">pour travailler</div>
         </Link>
 
-        <Link
-          to="/studies"
+        <Link to="/studies"
           className="usecase-card"
           aria-label="Vos études et éducation"
         >
           <div className="usecase-circle">
             <img src="/icons/studies.png" alt="Studies" />
           </div>
+
           <div className="usecase-label">vos études et éducation</div>
         </Link>
 
-        <Link to="/integration" className="usecase-card" aria-label="Pour s’intégrer">
+        <Link to="/integration" 
+        className="usecase-card" 
+        aria-label="Pour s’intégrer">
+
           <div className="usecase-circle">
             <img src="/icons/integration.png" alt="Integration" />
           </div>
+          
           <div className="usecase-label">titre de séjour, naturalisation, marriage</div>
         </Link>
       </div>

@@ -37,7 +37,6 @@ export const getAllPayments = async (req: Request, res: Response) => {
   }
 };
 
-
 export const createStripeSession = async (req: Request, res: Response) => {
   try {
     const { amount, currency, purchaseId } = req.body;
@@ -73,16 +72,15 @@ export const createStripeSession = async (req: Request, res: Response) => {
 
 
 export const stripeWebhook = async (req: Request, res: Response) => {
-  console.log ("Webhook called")
+
   try {
     const event = req.body;
    
     if (event?.type === "checkout.session.completed") {
+
       const session = event.data.object;
-
       const purchaseId = session?.metadata?.purchaseId;
-      console.log("Payment successful for purchase:", purchaseId);
-
+  
       if (!purchaseId) {
         console.log("No purchaseId in metadata");
         return res.json({ received: true });
@@ -99,10 +97,12 @@ export const stripeWebhook = async (req: Request, res: Response) => {
 
       const testUrl = result.rows[0]?.test_url;
       const customerEmail = result.rows[0]?.email;
-      
-      console.log("Test URL:", testUrl);
-      console.log("Customer Email:", customerEmail);
+
+      console.log ("Stripe webhook received");
+      console.log("Payment confirmed for purchase:", purchaseId);
+      console.log("Sending test email...");
       await sendTestEmail(customerEmail, testUrl);
+      console.log("Test email sent")
     }
 
     return res.json({ received: true });
@@ -138,8 +138,6 @@ export const confirmPayment = async (req: Request, res: Response) => {
     );
 
     const testUrl = result.rows[0]?.test_url;
-
-    
 
     return res.json({
       success: true,

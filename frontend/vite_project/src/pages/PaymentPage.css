@@ -10,10 +10,11 @@
   background: white;
   padding: 40px;
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
   text-align: center;
   max-width: 420px;
   width: 100%;
+
 }
 
 .payment-card h1 {
@@ -21,8 +22,9 @@
 }
 
 .payment-info {
-  color: #555;
+  color: #292828;
   margin-bottom: 30px;
+  font-size: 18px;
 }
 
 .payment-button {
@@ -33,4 +35,11 @@
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
+}
+
+.payment-warning {
+  font-size: 13px;
+  color: #444;
+  margin-top: 12px;
+  line-height: 1.4;
 }

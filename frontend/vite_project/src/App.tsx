@@ -10,6 +10,8 @@ import AdminPage from "./pages/AdminPage";
 import UsagePage from "./pages/UsagePage";
 import PaymentPage from "./pages/PaymentPage";
 import SuccessPage from "./pages/SuccessPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 
 
@@ -31,6 +33,8 @@ function App() {
         <Route path="/integration" element={<UsagePage />} />
         <Route path="/payment/:id" element={<PaymentPage />} />
         <Route path="/success" element={<SuccessPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
 
       
       </Routes>

@@ -5,7 +5,7 @@
   height: 380px;
   overflow: hidden;
   border-radius: 14px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
   background: #ffffff;
 }
 
@@ -48,6 +48,7 @@
   justify-content: center;
   padding: 50px;
   text-align: left;
+  font-family: "Orbitron", sans-serif;
 }
 
 

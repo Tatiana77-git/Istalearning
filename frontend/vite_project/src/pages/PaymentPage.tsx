@@ -97,6 +97,9 @@ function PaymentPage() {
           Un email avec le lien du test vous sera envoyé après paiement.
         </p>
 
+        <p className="payment-warning">
+          ⚠️ Ce test permet d'evaluer votre niveau et de vous orienter vers le parcours de formation le plus adapté.
+        </p>
         <button className="payment-button" onClick={handlePayment}>
           Payer maintenant
         </button>

@@ -44,7 +44,7 @@ export default function SkillsVideoSection() {
               src={skill.video}
               controls
             />
-            <h3>{skill.title}</h3>
+            <h3 className="title">{skill.title}</h3>
             <p className="subtitle">{skill.subtitle}</p>
             <p className="description">{skill.text}</p>
           </div>

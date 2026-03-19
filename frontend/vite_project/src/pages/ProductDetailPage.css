@@ -16,7 +16,7 @@
   background: white;
   border-radius: 16px;
   padding: 40px;
-  box-shadow: 0 20px 40px rgba(0, 40, 120, 0.08);
+  box-shadow: 0 20px 40px rgba(0, 40, 120, 0.6);
 }
 
 .product-detail-image {
@@ -73,7 +73,7 @@
 
 .buy-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(31, 111, 220, 0.35);
+  box-shadow: 0 10px 20px rgba(3, 24, 54, 0.35);
 }
 
 .auth-link {
