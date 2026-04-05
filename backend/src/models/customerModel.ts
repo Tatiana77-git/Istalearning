@@ -17,6 +17,7 @@ export const createCustomer = async (
   return result.rows[0];
 };
 
+
 export const findCustomerByEmail = async (email: string) => {
   const result = await pool.query(
     `
@@ -29,6 +30,7 @@ export const findCustomerByEmail = async (email: string) => {
 
   return result.rows[0] || null;
 };
+
 
 export const saveResetToken = async (
   customerId: number,
@@ -44,6 +46,8 @@ export const saveResetToken = async (
   );
 };
 
+
+
 export const findCustomerByResetToken = async (token: string) => {
   const result = await pool.query(
     `
@@ -56,6 +60,8 @@ export const findCustomerByResetToken = async (token: string) => {
 
   return result.rows[0] || null;
 };
+
+
 
 export const updateCustomerPassword = async (
   customerId: number,
@@ -70,4 +76,49 @@ export const updateCustomerPassword = async (
     `,
     [passwordHash, customerId]
   );
+};
+
+
+export const getAllCustomersModel = async () => {
+  const result = await pool.query(`
+    SELECT id_customer, email, phone, created_at
+    FROM customers
+    ORDER BY id_customer ASC
+  `);
+
+  return result.rows;
+};
+
+
+
+export const getCustomerByIdModel = async (id: string) => {
+  const result = await pool.query(
+    `
+    SELECT id_customer, email, phone, created_at
+    FROM customers
+    WHERE id_customer = $1
+    `,
+    [id]
+  );
+
+  return result.rows[0] || null;
+};
+
+
+
+export const createCustomerModel = async (
+  email: string,
+  phone: string,
+  passwordHash: string
+) => {
+  const result = await pool.query(
+    `
+    INSERT INTO customers (email, phone, password_hash, created_at)
+    VALUES ($1, $2, $3, CURRENT_DATE)
+    RETURNING id_customer, email, phone, created_at
+    `,
+    [email, phone, passwordHash]
+  );
+
+  return result.rows[0];
 };
