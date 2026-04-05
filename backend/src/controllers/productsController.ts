@@ -1,41 +1,18 @@
 import { Request, Response } from "express";
-import { pool } from "../config/db";
-
+import { getAllProductsModel } from "../models/productModel";
+import { getProductByIdModel } from "../models/productModel";
 
 export const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const { lang } = req.query; 
+    const lang = typeof req.query.lang === "string" ? req.query.lang : undefined;
 
-    let query = `
-      SELECT
-        id_product,
-        title,
-        level,
-        language_code,
-        price,
-        test_url
-      FROM products
-    `;
-
-    const values: any[] = [];
-
-    if (typeof req.query.lang === "string") {
-      query += " WHERE language_code = $1";
-      values.push(req.query.lang.toUpperCase());
-    }
-
-    query += " ORDER BY level ASC";
-
-    const result = await pool.query(query, values);
+    const products = await getAllProductsModel(lang);
 
     return res.status(200).json({
       success: true,
-      data: result.rows,
+      data: products,
     });
-
-  } catch (error) {
-    console.error("Erreur getAllProducts:", error);
-
+  } catch {
     return res.status(500).json({
       success: false,
       message: "Erreur lors de la récupération des produits",
@@ -47,24 +24,11 @@ export const getAllProducts = async (req: Request, res: Response) => {
 
 export const getProductById = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
 
-    const query = `
-      SELECT
-        id_product,
-        title,
-        level,
-        language_code,
-        price,
-        test_url,
-        description
-      FROM products
-      WHERE id_product = $1
-    `;
+    const product = await getProductByIdModel(id);
 
-    const result = await pool.query(query, [id]);
-
-    if (result.rows.length === 0) {
+    if (!product) {
       return res.status(404).json({
         success: false,
         message: "Product not found",
@@ -73,10 +37,9 @@ export const getProductById = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       success: true,
-      data: result.rows[0],
+      data: product,
     });
-  } catch (error) {
-    console.error("Erreur getProductById:", error);
+  } catch {
     return res.status(500).json({
       success: false,
       message: "Cannot get product",
